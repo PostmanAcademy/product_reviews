@@ -1,4 +1,4 @@
-# 🚗🌌 Vehicle Service API
+# 🌌 Product review Service API
 
 > *From API contract to running service — your mission, should you choose to accept it.*
 
@@ -22,30 +22,12 @@
 
 This repository is your launchpad for learning how modern APIs are designed, documented, and built. It contains a **Postman Collection** that acts as the single source of truth — the *API design contract* — for a RESTful Vehicle Service. Your goal is to study that contract and implement a working service that satisfies it.
 
-The collection defines the full lifecycle of a `vehicle` resource:
 
-| Operation | Method | Path | Description |
-|-----------|--------|------|-------------|
-| Create | `POST` | `/vehicles` | Register a new vehicle |
-| Retrieve all | `GET` | `/vehicles` | List all vehicles |
-| Retrieve one | `GET` | `/vehicles/:id` | Fetch a single vehicle by ID |
-| Update | `PATCH` | `/vehicles/:id` | Modify a vehicle's attributes |
-| Delete | `DELETE` | `/vehicles/:id` | Remove a vehicle from the system |
 
 Authentication is handled via **JWT Bearer tokens** (HS256 algorithm). All required token details — including the signing secret and sample payload — are embedded in the collection's authorization configuration.
 
 ---
 
-## 📂 Repository Structure
-
-```
-.
-├── postman/
-│   └── Vehicle_Service_Collection_postman_collection.json   # API design contract
-├── app/
-│   └── ...                                                  # Your Python implementation lives here
-└── README.md
-```
 
 > The `app/` directory is where you will build your implementation. Its contents are intentionally left open — the collection defines *what* the service must do; how you build it is up to you.
 
@@ -62,17 +44,6 @@ The Postman Collection is the authoritative specification for this project. It c
 
 Treat the collection the way an engineer treats an OpenAPI spec: your implementation is correct when all requests in the collection return responses that match the documented examples.
 
-### Response Codes to Implement
-
-| Code | Meaning |
-|------|---------|
-| `200 OK` | Successful retrieval |
-| `201 Created` | Vehicle successfully created |
-| `204 No Content` | Vehicle successfully deleted |
-| `400 Bad Request` | Missing or invalid request attribute |
-| `404 Not Found` | Vehicle ID does not exist |
-| `409 Conflict` | A vehicle with the same VIN already exists |
-| `500 Internal Server Error` | Unexpected server-side failure |
 
 ---
 
@@ -129,24 +100,6 @@ Postman makes it easy to explore the contract before you write a single line of 
 - Use the **Mock Server** feature to simulate the API before your implementation is ready
 - Use **Collection Runner** to execute all requests in sequence against your live service
 - Use the built-in **Authorization** tab to inspect the JWT configuration
-
----
-
-## 🌌 Vehicle Data Model
-
-Each vehicle resource contains the following fields:
-
-| Field | Type | Description |
-|-------|------|-------------|
-| `id` | integer | Auto-assigned unique identifier |
-| `nickName` | string | A friendly name for the vehicle |
-| `vin` | string | Vehicle Identification Number (must be unique) |
-| `make` | string | Manufacturer (e.g., `Mercury`, `Nissan`) |
-| `model` | string | Model name (e.g., `Villager`, `Cube`) |
-| `year` | string | Model year |
-| `miles` | integer | Current odometer reading |
-
-The `vin` field serves as the natural uniqueness constraint — the service must reject attempts to register a duplicate VIN.
 
 ---
 
